@@ -1,37 +1,48 @@
-<h1>Burger Time!</h1>
+	<div class="row">
+		<div class="center col-sm-12">
+				<img src="../public/assets/css/img/burger.jpg" alt="Burger Time App">
+			<h1>BURGER TIME!</h1>
+		</div>
+	</div>
 
-<h2>What Burger Are You Craving?</h2>
+<main>
+  <div class="container">
+    <div class="row">
+    	<h2>Hot and Ready Burgers Here!</h2>
+      <div class="col s6">
+        {{#each burgers}}
+          {{#unless this.devoured}}
+            <div>
+              <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
+                <button type="submit" class='burgerAvailable'> {{this.burger_name}}</button>
+              </form>
+            </div>
+          {{/unless}}
+        {{/each}}
+      </div>
 
-<ul>
-  {{#each burgers}}
-    {{#unless devoured}}
-      {{> burgers/burger-block devoured=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
-
-<h2>Burgers You've Already Enjoyed!</h2>
-
-<ul>
-  {{#each burgers}}
-    {{#if devoured}}
-      {{> burgers/burger-block devoured=false}}
-    {{/if}}
-  {{/each}}
-</ul>
-
-<h2>Add a Delectable Burger</h2>
-<form class="create-form">
-
-  <div class="form-group">
-    <label for="burger">Burger: </label>
-    <input type="text" id="burger" name="name">
+      <div class="col s6">
+        {{#each burgers}}
+          {{#if this.devoured}}
+            <div class='burgerEaten'>
+              <div>
+                {{this.burger_name}}
+              </div>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
   </div>
+</main>
 
-  <div class="form-group">
-    <label for="noteaten">On Your Wish List?</label><br>
-    <input type="radio" name="burgertime" value="1" checked>Not Eaten<br>
-    <input type="radio" name="burgertime" value="0">Eeaten</div>
+<h2>Don't See What You Like, Suggest a Burger!</h2>
 
-  <button type="submit">Add Burger</button>
-</form>
+<div class="row">
+  <div class="col s12">
+    <form action="/burgers" method="POST">
+      <input type="text" id="name" name="burger_name" placeholder="Uber Delicious Burger">
+      <button type="submit" class="addBurgerButton">Suggestions Submitted Here</button>
+    </form>
+  </div>
+</div>
