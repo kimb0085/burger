@@ -1,13 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-		<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
-		<title>Burger Time!</title>
-		<script src="https://code.jquery.com/jquery.js"></script>
-		<!-- <script src="/assets/js/cats.js"></script> -->
-	</head>
-	<body>
-		{{{ body }}}
-	</body>
-</html>
+<h1>Burger Time!</h1>
+
+<h2>What Burger Are You Craving?</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#unless devoured}}
+      {{> burgers/burger-block devoured=true}}
+    {{/unless}}
+  {{/each}}
+</ul>
+
+<h2>Burgers You've Already Enjoyed!</h2>
+
+<ul>
+  {{#each burgers}}
+    {{#if devoured}}
+      {{> burgers/burger-block devoured=false}}
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>Add a Delectable Burger</h2>
+<form class="create-form">
+
+  <div class="form-group">
+    <label for="burger">Burger: </label>
+    <input type="text" id="burger" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="noteaten">On Your Wish List?</label><br>
+    <input type="radio" name="burgertime" value="1" checked>Not Eaten<br>
+    <input type="radio" name="burgertime" value="0">Eeaten</div>
+
+  <button type="submit">Add Burger</button>
+</form>
